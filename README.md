@@ -23,7 +23,7 @@ docker-compose up
  
   * to run the experiments in the container run
   ```
-  python optimize_model.py
+  python rs.py
   ```
 
 * one.py
@@ -34,7 +34,7 @@ docker-compose up
   
   * to run the experiments in the container simply run
   ```
-  python optimize_model.py
+  python one.py
   ```
   
 * predict.py
@@ -44,7 +44,7 @@ docker-compose up
 
   * to run the experiments in the container simply run
   ```
-  python optimize_model.py
+  python predict.py
   ```
 * helper_functions.py
 
