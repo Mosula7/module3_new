@@ -39,7 +39,7 @@ def objective_lgbm(trial, X, y):
                 if value['type'] == "categorical":
                     params[key] = trial.__getattribute__(f"suggest_{value["type"]}")(key, value["values"])
             else:
-                params[key] = value
+                params[key] = trial.suggest_categorical(key, [value])
 
         mlflow.log_params(params)
         # arrays for metrics
@@ -113,17 +113,9 @@ def train_best_model():
     target = 'Churn_Yes'
     path = os.path.join('data', data_name)
     
+    params, train, test = get_best_params(target, path, n_trials)
+    print(params)
 
-    default_params = {
-        'objective': 'binary',
-        'boosting_type': 'gbdt',
-        'eval_metric': 'logloss',
-        'n_estimators': 1000,
-        'verbose': -100,
-        'random_state': 17,
-    }
-
-    best_params, train, test = get_best_params(target, path, n_trials)
     train, val = train_test_split(train, test_size=0.15, stratify=train[target], random_state=17)
 
     X_train = train.drop(columns=[target])
@@ -134,8 +126,6 @@ def train_best_model():
 
     X_test = test.drop(columns=[target])
     y_test = test[target]
-
-    params = default_params | best_params
 
     mlflow.set_experiment("churn_best")
     model_name = datetime.now().strftime("%d_%m_%Y_%H_%M_%S")
