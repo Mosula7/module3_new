@@ -5,7 +5,7 @@ import os
 from datetime import datetime
 from helper_functions import process_data, classification_predictive_power
 
-with open('config_one.json') as file:
+with open('config_predict.json') as file:
     config = json.load(file)
 
 data_name = config["data"]
@@ -16,7 +16,7 @@ df = process_data(df)
 
 model = lgb.Booster(model_file=os.path.join('models', model_name))
 
-target =  'Churn_Yes'
+target = 'Churn_Yes'
 
 X = df[df.columns.drop(target)]
 y = df[target]
