@@ -1,5 +1,4 @@
 import json
-import numpy as np
 import pandas as pd
 
 import lightgbm as lgb
@@ -7,8 +6,7 @@ import lightgbm as lgb
 from datetime import datetime
 import os
 import argparse
-from sklearn.metrics import roc_auc_score, accuracy_score
-from helper_functions import classification_predictive_power, process_data, split_data, train_and_log_performance
+from helper_functions import process_data, split_data, train_and_log_performance
 
 import mlflow
 mlflow.set_tracking_uri("sqlite:///mlflow.db")
