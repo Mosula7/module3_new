@@ -5,6 +5,7 @@ WORKDIR /app
 
 COPY ./rs.py /app/rs.py
 COPY ./one.py /app/one.py
+COPY ./predict.py /app/predict.py
 COPY ./helper_functions.py /app/helper_functions.py
 
 COPY ./requirements.txt ./
