@@ -29,7 +29,7 @@ docker-compose up
 * one.py
 
   takes one optinal command line keyword argument -d - data to train the model on (data.csv as default). it splits the data into train validation and test sets and logs auc and accuracy on these 
-  three sets into mlflow server including the model file (churn_one experient), it also saves the model booster object into models directory and graph of the models performace on the test set in 
+  three sets into mlflow server including the model file (churn_one experiment), it also saves the model booster object into models directory and graph of the models performace on the test set in 
   the graphs direcory. it takes hyperparameters from the config_one.json. in the config file write {"hp1_name": "hp1_value", "hp2_name": "hp2_value"...}.
   
   * to run the experiments in the container simply run
