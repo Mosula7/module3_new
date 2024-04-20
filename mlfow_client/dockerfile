@@ -5,7 +5,7 @@ WORKDIR /app
 
 COPY ./rs.py /app/rs.py
 COPY ./one.py /app/one.py
-COPY ./process_data.py /app/process_data.py
+COPY ./helper_functions.py /app/helper_functions.py
 
 COPY ./requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
