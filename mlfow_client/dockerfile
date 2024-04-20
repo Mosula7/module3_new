@@ -3,5 +3,9 @@ FROM python:3.12.2
 
 WORKDIR /app
 
+COPY ./rs.py /app/rs.py
+COPY ./one.py /app/one.py
+COPY ./process_data.py /app/process_data.py
+
 COPY ./requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt

@@ -1,7 +1,7 @@
 version: "3.8"  
 
 services:
-  model_optimization:
+  model_server:
     build: mlfow_server
     volumes:
       - ./mlfow_server/mlflow.db:/app/mlflow.db
@@ -14,6 +14,11 @@ services:
     volumes: 
       - ./mlfow_client/models:/app/models
       - ./mlfow_client/data:/app/data
+
+      - ./mlfow_client/config_rs.json:/app/config_rs.json
+      - ./mlfow_client/config_one.json:/app/config_one.json
+
+
       - ./mlfow_server/mlflow.db:/app/mlflow.db
     tty: true
 
