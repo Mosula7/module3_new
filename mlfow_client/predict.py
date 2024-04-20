@@ -21,9 +21,9 @@ target = 'Churn_Yes'
 X = df[df.columns.drop(target)]
 y = df[target]
 
-pred = pd.DataFrame(model.predict(X), columns=['PRED'])
+pred = model.predict(X)
 
 pred_name = datetime.now().strftime("%d_%m_%Y_%H_%M_%S")
 classification_predictive_power(y, pred, name=pred_name)
 
-pred.to_csv(os.path.join('predictions', f'pred_{pred_name}.csv'))
+pd.DataFrame(pred, columns=['PRED']).to_csv(os.path.join('predictions', f'pred_{pred_name}.csv'))
