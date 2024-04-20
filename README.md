@@ -4,6 +4,10 @@ I got the dataset from kaggle and it is a binary clasification project about cus
 ## The Project runs two containers:
 * mlfow server - just hosts mlflow sqlite server on localhost 5000
 * mlfow client - container for running hyperparemeter search, training single model and predicting
+* to run both containers by:
+```
+docker-compose up
+```
 
 ## mlfow_client
 * rs.py
