@@ -1,27 +1,27 @@
 version: "3.8"  
 
 services:
-  model_server:
-    build: mlfow_server
+  mlflow_server:
+    build: mlflow_server
     volumes:
-      - ./mlfow_server/mlflow.db:/app/mlflow.db
+      - ./mlflow_server/mlflow.db:/app/mlflow.db
     ports:
       - "5000:5000"
     tty: true
 
-  mlfow_client:
-    build: mlfow_client
+  mlflow_client:
+    build: mlflow_client
     volumes: 
-      - ./mlfow_client/models:/app/models
-      - ./mlfow_client/data:/app/data
-      - ./mlfow_client/graphs:/app/graphs
-      - ./mlfow_client/predictions:/app/predictions
+      - ./mlflow_client/models:/app/models
+      - ./mlflow_client/data:/app/data
+      - ./mlflow_client/graphs:/app/graphs
+      - ./mlflow_client/predictions:/app/predictions
 
-      - ./mlfow_client/config_rs.json:/app/config_rs.json
-      - ./mlfow_client/config_one.json:/app/config_one.json
-      - ./mlfow_client/config_predict.json:/app/config_predict.json
+      - ./mlflow_client/config_rs.json:/app/config_rs.json
+      - ./mlflow_client/config_one.json:/app/config_one.json
+      - ./mlflow_client/config_predict.json:/app/config_predict.json
 
-      - ./mlfow_server/mlflow.db:/app/mlflow.db
+      - ./mlflow_server/mlflow.db:/app/mlflow.db
     tty: true
 
 
