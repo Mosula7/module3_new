@@ -14,7 +14,7 @@ from functools import partial
 from datetime import datetime
 import os
 import argparse
-from process_data import process_data
+from helper_functions import process_data, train_and_log_performance
 
 import mlflow
 mlflow.set_tracking_uri("sqlite:///mlflow.db")
@@ -98,23 +98,11 @@ def get_best_params(target, path, n_trials):
 
 
 
-def train_best_model():
-    
-    parser = argparse.ArgumentParser()
- 
-    parser.add_argument("-n", "--n_trials", help = "number of trials in the hyperparameter random search", type=int, default=10)
-    parser.add_argument("-d", "--data_name", help = "name of the data file", default='data.csv')
-
-    args = parser.parse_args()
-
-    n_trials = args.n_trials
-    data_name = args.data_name
-
+def train_best_model(n_trials, data_name):
     target = 'Churn_Yes'
     path = os.path.join('data', data_name)
     
     params, train, test = get_best_params(target, path, n_trials)
-    print(params)
 
     train, val = train_test_split(train, test_size=0.15, stratify=train[target], random_state=17)
 
@@ -129,26 +117,21 @@ def train_best_model():
 
     mlflow.set_experiment("churn_best")
     model_name = datetime.now().strftime("%d_%m_%Y_%H_%M_%S")
-    with mlflow.start_run(run_name=model_name):
-        mlflow.log_params(params)
-        best_model = lgb.LGBMClassifier(**params)
-        best_model.fit(X_train, y_train, eval_set=[(X_val, y_val)])
+    train_and_log_performance(model_name, params, X_train, y_train, X_val, y_val, X_test, y_test)
 
-        for key, data in {'train': [X_train, y_train], 'val': [X_val, y_val], 'test': [X_test, y_test]}.items():
-            pred = best_model.predict_proba(data[0])[:,-1]
-
-            auc = roc_auc_score(data[1], pred)
-            acc = accuracy_score(data[1], pred>.5)
-        
-            mlflow.log_metric(f'{key}_auc', auc)
-            mlflow.log_metric(f'{key}_acc', acc)
-
-            mlflow.lightgbm.log_model(best_model, "lightgbm_model")
-        
-    
-    best_model.booster_.save_model(os.path.join('models', f'model_{model_name}.txt'))
 
 if __name__ == '__main__':
-    train_best_model()
+
+    parser = argparse.ArgumentParser()
+ 
+    parser.add_argument("-n", "--n_trials", help = "number of trials in the hyperparameter random search", type=int, default=10)
+    parser.add_argument("-d", "--data_name", help = "name of the data file", default='data.csv')
+
+    args = parser.parse_args()
+
+    n_trials = args.n_trials
+    data_name = args.data_name
+
+    train_best_model(n_trials, data_name)
 
 
