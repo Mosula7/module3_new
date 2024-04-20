@@ -1,0 +1,32 @@
+{
+    "objective": "binary",
+    "boosting_type": "gbdt",
+    "eval_metric": "logloss",
+    "n_estimators": 1000,
+    "verbose": -100,
+    "random_state": 17,
+
+    "scale_pos_weight": {"type": "float",
+                         "values": [1.0, 2.0]},
+
+    "learning_rate": {"type": "float",
+                      "values": [0.01, 0.1]},
+
+    "num_leaves": {"type": "int", 
+                   "values": [30, 60]},
+
+    "values_depth":  {"type": "categorical", 
+                      "values": [-1, 7, 12]},
+
+    "reg_alpha":  {"type": "int", 
+                   "values": [10, 30]},
+
+    "reg_lambda": {"type": "int", 
+                   "values": [10, 30]},
+
+    "subsample": {"type": "float", 
+                  "values": [0.4, 0.8]},
+
+    "col_sample_bytree": {"type": "float", 
+                          "values": [0.4, 0.8]}
+}
