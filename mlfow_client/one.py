@@ -30,10 +30,10 @@ def train_model(data_name):
 
     mlflow.set_experiment("churn_one")
     model_name = datetime.now().strftime("%d_%m_%Y_%H_%M_%S")
-    
+
     train_and_log_performance(model_name, params, X_train, y_train, X_val, y_val, X_test, y_test)
 
-def main():
+if __name__ == '__main__':
     parser = argparse.ArgumentParser()
  
     parser.add_argument("-d", "--data_name", help = "name of the data file", default='data.csv')
