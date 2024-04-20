@@ -1,0 +1,22 @@
+version: "3.8"  
+
+services:
+  model_optimization:
+    build: mlfow_server
+    volumes:
+      - ./mlfow_server/mlflow.db:/app/mlflow.db
+    ports:
+      - "5000:5000"
+    tty: true
+
+  mlfow_client:
+    build: mlfow_client
+    volumes: 
+      - ./mlfow_client/models:/app/models
+      - ./mlfow_client/data:/app/data
+      - ./mlfow_server/mlflow.db:/app/mlflow.db
+    tty: true
+
+
+
+  
