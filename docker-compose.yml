@@ -19,6 +19,7 @@ services:
 
       - ./mlfow_client/config_rs.json:/app/config_rs.json
       - ./mlfow_client/config_one.json:/app/config_one.json
+      - ./mlfow_client/config_predict.json:/app/config_predict.json
 
       - ./mlfow_server/mlflow.db:/app/mlflow.db
     tty: true
