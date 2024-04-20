@@ -35,7 +35,7 @@ def objective_lgbm(trial, X, y):
         for key, value in config.items():
             if isinstance(value, dict):
                 if value["type"] in ("int", "float"):
-                    params[key] = trial.__getattribute__(f"suggest_{value["type"]}")(key, value["values"][0], value["values"][0])
+                    params[key] = trial.__getattribute__(f"suggest_{value["type"]}")(key, value["values"][0], value["values"][1])
                 if value['type'] == "categorical":
                     params[key] = trial.__getattribute__(f"suggest_{value["type"]}")(key, value["values"])
             else:
